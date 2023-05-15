@@ -173,6 +173,17 @@ def sift(out_fn):
         write_output(train, test, out_fn, "euclidean")
 
 
+def yoochoose(out_fn):
+    import pandas as pd
+
+    fn = os.path.join("data", "yoochoose.parquet")
+    df = pd.read_parquet(fn)
+    all_vectors = df.values
+    train = all_vectors[:all_vectors.shape[0] // 2]
+    test = all_vectors[all_vectors.shape[0] // 2:]
+    write_output(train, test, out_fn, "euclidean")
+
+
 def gist(out_fn):
     import tarfile
 
@@ -504,4 +515,5 @@ DATASETS = {
     "movielens1m-jaccard": movielens1m,
     "movielens10m-jaccard": movielens10m,
     "movielens20m-jaccard": movielens20m,
+    "yoochoose": yoochoose,
 }
